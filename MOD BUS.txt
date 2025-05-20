@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+
+int main()
+{
+    uint8_t data[] = {0x42, 0x6F, 0x66, 0x66};  // Big Endian
+    uint8_t reordered[4];  // For Little Endian systems
+
+    // Reverse byte order for Little Endian
+    reordered[0] = data[3];
+    reordered[1] = data[2];
+    reordered[2] = data[1];
+    reordered[3] = data[0];
+
+    float voltage;
+    memcpy(&voltage, reordered, 4);  // Now correct byte order
+
+    printf("Voltage: %.2f V\n", voltage);  // Output should be 55.90 V
+
+    return 0;
+}
